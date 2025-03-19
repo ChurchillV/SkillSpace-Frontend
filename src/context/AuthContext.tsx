@@ -22,14 +22,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
         const token = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_ACCESS_TOKEN}` as string);
         const storedRole = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}`) as "guest" | "user" | "organizer"
 
-        if((storedRole === "user" || storedRole === "organizer") && token) {
+        if(storedRole && (storedRole === "user" || storedRole === "organizer") && token) {
             setIsAuthenticated(true);
+            setRole(storedRole);
         } else {
             setIsAuthenticated(false);
             localStorage.setItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}`, "guest");
+            setRole("guest");
         }
 
-        setRole(storedRole);
     }, []);
 
 
