@@ -1,33 +1,46 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { AuthContextType } from "../types";
+import { AuthContextType, Organizer, User } from "../types";
 import { useNavigate } from "react-router";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_PROFILE}`);
+        return storedUser ? JSON.parse(storedUser) : null;
+    })
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+        const accessToken = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_ACCESS_TOKEN}`);
+        return accessToken ? true : false;
+    });
+
     const [role, setRole] = useState<"guest" | "user" |"organizer">("guest");
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}` as string);
+        const token = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_ACCESS_TOKEN}` as string);
         const storedRole = localStorage.getItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}`) as "guest" | "user" | "organizer"
 
         if((storedRole === "user" || storedRole === "organizer") && token) {
             setIsAuthenticated(true);
-        } 
+        } else {
+            setIsAuthenticated(false);
+            localStorage.setItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}`, "guest");
+        }
 
         setRole(storedRole);
     }, []);
 
 
-    const login = (role: "user" | "organizer", access_token: string) => {
+    const login = (role: "user" | "organizer", user: User | Organizer, access_token: string) => {
         setIsAuthenticated(true);
         setRole(role);
+        setUser(user);
 
         localStorage.setItem(`${import.meta.env.VITE_LOCALSTORAGE_ACCESS_TOKEN}` as string, access_token);
         localStorage.setItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}` as "guest" | "user" | "organizer", role);
+        localStorage.setItem(`${import.meta.env.VITE_LOCALSTORAGE_PROFILE}`, JSON.stringify(user));
 
         navigate(role === 'organizer' ? '/org/home' : '/user/home')
     }
@@ -42,6 +55,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
 
     return(
         <AuthContext.Provider value={{
+            user,
             isAuthenticated,
             role,
             login,

@@ -13,7 +13,7 @@ import { useAuth } from "../../../context/AuthContext";
 const Login = () => {
   const [role, setRole] = useState<"user" | "organizer">("user");
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth()
+  const { login } = useAuth();
 
   // Validation schema
   const validationSchema = Yup.object({
@@ -32,8 +32,8 @@ const Login = () => {
 
       const { accessToken } = response.data;
 
-      localStorage.setItem(import.meta.env.VITE_LOCALSTORAGE_PROFILE, JSON.stringify(response.data.profile));
-      login(role, accessToken);
+      // localStorage.setItem(import.meta.env.VITE_LOCALSTORAGE_PROFILE, JSON.stringify(response.data.profile));
+      login(role, response.data.profile, accessToken);
       toast.success("Logged in successfully");
 
     } catch (error: any) {

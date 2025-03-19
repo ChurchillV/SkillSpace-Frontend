@@ -14,64 +14,65 @@ import PageTitle from './components/PageTitle/index.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-  <AuthProvider>
+    <AuthProvider>
 
-      <Toaster />
+        <Toaster />
 
-      <Routes>
+        <Routes>
 
-      <Route 
-        path="/" 
-        element={
-          <>
-            <PageTitle title='Welcome to SkillSpace'/>
-            <App />
-          </>
-        } 
-      />
-      
+        <Route 
+          path="/" 
+          element={
+            <>
+              <PageTitle title='Welcome to SkillSpace'/>
+              <App />
+            </>
+          } 
+        />
+        
+        <Route 
+          path='/org/home' 
+          element={ 
+            <>
+              <PageTitle title={`Organizer Home Page - SkillSpace`} />
+              <ProtectedRoute 
+                element={<OrgHomePage />}
+                requiredRole='organizer'
+              />  
+            </>
+          } 
+        />
 
-      <Route 
-        path='/org/home' 
-        element={ 
-          <>
-            <PageTitle title={`Organizer Home Page - SkillSpace`} />
-            <ProtectedRoute element={<OrgHomePage />}/>  
-          </>
-        } 
-      />
+        <Route 
+          path='/user/home'
+          element={ 
+            <>
+              <PageTitle title='User Home Page - SkillSpace'/>
+              <ProtectedRoute element={<UserHomePage />}/> 
+            </>
+          }
+        />
 
-      <Route 
-        path='/user/home'
-        element={ 
-          <>
-            <PageTitle title='User Home Page - SkillSpace'/>
-            <ProtectedRoute element={<UserHomePage />}/> 
-          </>
-        }
-      />
+        <Route 
+          path='/login' 
+          element={
+            <>
+              <PageTitle title='Login - SkillSpace'/>
+              <Login />
+            </>
+          } />
 
-      <Route 
-        path='/login' 
-        element={
-          <>
-            <PageTitle title='Login - SkillSpace'/>
-            <Login />
-          </>
-        } />
-
-      <Route 
-        path='/signup' 
-        element={
-          <>
-            <PageTitle title='Signup - SkillSpace' />
-            <SignUp />
-          </>
-        } />
-      
-      </Routes>
-  </AuthProvider>
-
+        <Route 
+          path='/signup' 
+          element={
+            <>
+              <PageTitle title='Signup - SkillSpace' />
+              <SignUp />
+            </>
+          } />
+        
+        </Routes>
+    </AuthProvider>
   </BrowserRouter>
 
   )

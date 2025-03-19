@@ -5,9 +5,10 @@ export interface CTAButtonProps {
 }
 
 export type AuthContextType = {
+    user: Organizer | User | null;
     isAuthenticated: boolean;
     role: "guest" | "user" | "organizer";
-    login: (role: "user" | "organizer", access_token: string) => void;
+    login: (role: "user" | "organizer", user: User | Organizer, access_token: string) => void;
     logout: () => void;
 }
 
