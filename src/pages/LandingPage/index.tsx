@@ -3,8 +3,22 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { Logo } from "../../components/Exports/export";
 import CTAButtonPrimary from "../../components/UI/CTAButtonPrimary";
+import CTAButtonSecondary from "../../components/UI/CTAButtonSecondary";
+import { useAuth } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
 
 const LandingPage = () => {
+    const { role } = useAuth();
+    const [onHomepageClickEndpoint, setOnHomepageClickEndpoint] = useState("/login");
+
+    useEffect(() => {
+        if(role === 'user') {
+            setOnHomepageClickEndpoint('/user/home');
+        } else {
+            setOnHomepageClickEndpoint('/org/home');
+        }
+    }, [])
+
   return (
     <div className="text-gray-900">
         {/* Header */}
@@ -31,14 +45,19 @@ const LandingPage = () => {
             Discover and register for workshops near you, or host your own!  
         </motion.p>
         <motion.div 
-            className="mt-6"
+            className="mt-6 flex flex-col lg:flex-row gap-2"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
         >
             <CTAButtonPrimary 
                 content="Explore Workshops"
-                linkTo="/"
+                linkTo="/workshops"
+            />
+
+            <CTAButtonSecondary 
+                content="To HomePage"
+                linkTo={onHomepageClickEndpoint}
             />
         </motion.div>
         </section>
@@ -126,10 +145,10 @@ const LandingPage = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.8 }}
         >
-            <button className="relative px-6 py-3 font-bold text-gray-900 rounded-3xl bg-gray-900 hover:scale-75 transition delay-75 group">
-                <span className="absolute inset-0 border-2 rounded-3xl bg-gradient-to-t from-gray-100 via-white to-white animate-pulse group-hover:animate-none"></span>
-                <span className="relative z-10">Get Started</span>
-            </button>
+           <CTAButtonPrimary 
+                content="Get Started"
+                linkTo="/signup"
+            />
         </motion.div>
 
         </section>

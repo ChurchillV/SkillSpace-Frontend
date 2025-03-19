@@ -12,7 +12,7 @@ const SideBar = () => {
         {
             "name": "Home",
             "icon": "Home",
-            "route": "/user/home",
+            "route": "/workshops",
         }, 
         {
             "name": "My Events",

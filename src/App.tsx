@@ -11,13 +11,18 @@ import SignUp from './pages/Auth/Signup/index.tsx'
 import PageTitle from './components/PageTitle/index.tsx'
 import { useEffect } from 'react'
 import Layout from './components/Layout/index.tsx'
+import AllWorkshops from './pages/Workshops/AllWorkshops/index.tsx'
 
 function AppRoutes() {
   const { isAuthenticated, role } = useAuth();
   const navigate = useNavigate();
+  const noRedirectRoutes = [
+    "/",
+  ];
+  const isRedirectRoute = !noRedirectRoutes.includes(window.location.pathname);
 
   useEffect(() => {
-    if(isAuthenticated) {
+    if(isAuthenticated && isRedirectRoute) {
       const redirectEndpoint = role === "user" ? "/user/home" : "/org/home";
       navigate(redirectEndpoint);
     }
@@ -37,6 +42,36 @@ function AppRoutes() {
               <LandingPage />
             </>
           } 
+        />
+
+        <Route 
+          path='/login' 
+          element={
+            <>
+              <PageTitle title='Login - SkillSpace'/>
+              <Login />
+            </>
+          } 
+        />
+
+        <Route 
+          path='/signup' 
+          element={
+            <>
+              <PageTitle title='Signup - SkillSpace' />
+              <SignUp />
+            </>
+          } 
+        />
+
+        <Route 
+          path='/workshops'
+          element={
+            <>
+              <PageTitle title='Explore Workshops on SkillSpace' />
+              <AllWorkshops />
+            </>
+          }
         />
         
         <Route 
@@ -61,24 +96,6 @@ function AppRoutes() {
             </>
           }
         />
-
-        <Route 
-          path='/login' 
-          element={
-            <>
-              <PageTitle title='Login - SkillSpace'/>
-              <Login />
-            </>
-          } />
-
-        <Route 
-          path='/signup' 
-          element={
-            <>
-              <PageTitle title='Signup - SkillSpace' />
-              <SignUp />
-            </>
-          } />
         
       </Routes>
     </>

@@ -22,7 +22,6 @@ const LoggedInHeader = () => {
 
       {/* User Profile */}
       <div className="flex items-center gap-4">
-        <span className="text-xs text-tertiary">{profile.email}</span>
         <img
           src={profile.photo || Placeholder}
           alt="Organizer"

@@ -50,8 +50,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
         setIsAuthenticated(false);
         setRole('guest');
 
-        localStorage.removeItem(`${import.meta.env.VITE_LOCALSTORAGE_ACCESS_TOKEN}`)
-        navigate('login');
+        localStorage.removeItem(`${import.meta.env.VITE_LOCALSTORAGE_ACCESS_TOKEN}`);
+        localStorage.removeItem(`${import.meta.env.VITE_LOCALSTORAGE_PROFILE}`);
+        localStorage.removeItem(`${import.meta.env.VITE_LOCALSTORAGE_ROLE}`);
+
+        navigate('/');
     }
 
     return(
