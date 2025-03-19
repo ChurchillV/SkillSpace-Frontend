@@ -16,6 +16,10 @@ export type ProtectedRouteType = {
     requiredRole?: "user" | "organizer";
 }
 
+export type PageTitleProps = {
+    title: string
+}
+
 export type Organizer = {
     id: string;
     name: string;

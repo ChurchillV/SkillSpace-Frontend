@@ -9,6 +9,8 @@ import OrgHomePage from './pages/OrganizerHomePage/index.tsx'
 import ProtectedRoute from './components/ProtectedRoute/index.tsx'
 import UserHomePage from './pages/UserHomePage/index.tsx'
 import SignUp from './pages/Auth/Signup/index.tsx'
+import PageTitle from './components/PageTitle/index.tsx'
+
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -18,20 +20,54 @@ createRoot(document.getElementById('root')!).render(
 
       <Routes>
 
-      <Route path="/" element={<App />} />
+      <Route 
+        path="/" 
+        element={
+          <>
+            <PageTitle title='Welcome to SkillSpace'/>
+            <App />
+          </>
+        } 
+      />
       
 
-      <Route path='/org/home' 
-        element={ <ProtectedRoute element={<OrgHomePage />}/> } 
+      <Route 
+        path='/org/home' 
+        element={ 
+          <>
+            <PageTitle title={`Organizer Home Page - SkillSpace`} />
+            <ProtectedRoute element={<OrgHomePage />}/>  
+          </>
+        } 
       />
 
-      <Route path='/user/home'
-        element={ <ProtectedRoute element={<UserHomePage />}/> }
+      <Route 
+        path='/user/home'
+        element={ 
+          <>
+            <PageTitle title='User Home Page - SkillSpace'/>
+            <ProtectedRoute element={<UserHomePage />}/> 
+          </>
+        }
       />
 
-      <Route path='/login' element={<Login />} />
+      <Route 
+        path='/login' 
+        element={
+          <>
+            <PageTitle title='Login - SkillSpace'/>
+            <Login />
+          </>
+        } />
 
-      <Route path='/signup' element={<SignUp />} />
+      <Route 
+        path='/signup' 
+        element={
+          <>
+            <PageTitle title='Signup - SkillSpace' />
+            <SignUp />
+          </>
+        } />
       
       </Routes>
   </AuthProvider>
