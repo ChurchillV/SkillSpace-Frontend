@@ -1,3 +1,6 @@
+import { ReactNode } from "react";
+import { IconMapKey } from "./components/SideBar/iconmap";
+
 // Props for CTA buttons
 export interface CTAButtonProps {
     content: string,
@@ -42,3 +45,13 @@ export type User = {
     password: string;
     photo: string | null;
 };
+
+export interface NavItemProps {
+    icon: IconMapKey,
+    name: string,
+    route: string,
+}
+
+export interface LayoutProps {
+    children: ReactNode;
+}

@@ -10,7 +10,7 @@ const LandingPage = () => {
         {/* Header */}
         <Header />
         {/* Hero Section */}
-        <section className="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-black via-gray-800 to-gray-900 text-white">
+        <section className="h-screen flex flex-col justify-center items-center text-center bg-primary text-white">
         <motion.div>
             <img src={Logo} alt="Skillspace Logo" className="w-36 h-auto" />
         </motion.div>
@@ -100,7 +100,7 @@ const LandingPage = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="py-20 text-center bg-gradient-to-r from-black via-gray-800 to-gray-900 text-white">
+        <section className="py-20 text-center bg-primary text-white">
         <motion.h2 
             className="text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 30 }}
