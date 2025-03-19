@@ -97,7 +97,7 @@ const LandingPage = () => {
         >
             Key Features
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl md:mx-auto mx-3">
             {[
             { title: "Find Workshops", desc: "Search for workshops near you and register instantly." },
             { title: "Host Workshops", desc: "Create and manage your own workshops easily." },
@@ -119,7 +119,7 @@ const LandingPage = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="py-20 text-center bg-primary text-white">
+        <section className="flex flex-col items-center py-20 text-center bg-primary text-white">
         <motion.h2 
             className="text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 30 }}
@@ -139,7 +139,7 @@ const LandingPage = () => {
             Join SkillSpace today and start your learning journey!
         </motion.p>
         <motion.div 
-            className="mt-6"
+            className="mt-6 w-1/2 flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
