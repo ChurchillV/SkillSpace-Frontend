@@ -36,7 +36,7 @@ const SignUp = () => {
 
       const { accessToken } = response.data;
       localStorage.setItem(import.meta.env.VITE_LOCALSTORAGE_PROFILE, JSON.stringify(response.data.profile));
-      login(role, accessToken);
+      login(role, response.data.profile, accessToken);
       toast.success("Signup successful! Logged in.");
     } catch (error: any) {
       if(error.response.status === 400) {
