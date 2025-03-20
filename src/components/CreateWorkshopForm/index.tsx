@@ -18,6 +18,7 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
     const organizerId = user?.id;
     const [tags, setTags] = useState<string[]>([]);
     const [tagInput, setTagInput] = useState("");
+    const [loading, setLoading] = useState(false);
     const [photo, setPhoto] = useState("");
 
     const addTag = () => {
@@ -34,6 +35,7 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
     const handlePhotoUpload = async(file: File) => {
         const cloudinaryUrl = await uploadToCloudinary(file);
         setPhoto(cloudinaryUrl);
+        setLoading(false);
     }
 
     const validationSchema = workshopSchema;
@@ -44,6 +46,7 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
             console.log("Values: ", values);
             const response = await axios.post(`${import.meta.env.VITE_LIVE_BACKEND_URL}/workshops`, {
                 ...values,
+                photo, 
                 tags,
                 organizerId
             });
@@ -83,7 +86,6 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
                         summary: "",
                         description: "",
                         date: "",
-                        photo: "",
                         venue: "",
                         isRecurring: false,
                         isVirtual: false,
@@ -142,7 +144,7 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
                             {({ push, remove }) => (
                                 <div>
                                     {values.recurrenceDetails.map((_, index) => (
-                                        <div key={index} className="flex gap-2">
+                                        <div key={index} className="flex gap-2 my-2">
                                             <Field type="date" name={`recurrenceDetails.${index}.date`} className="w-1/3 p-2 bg-gray-700 border border-gray-600 rounded" placeholder="Date" />
                                             <Field type="time" name={`recurrenceDetails.${index}.time`} className="w-1/3 p-2 bg-gray-700 border border-gray-600 rounded" placeholder="Time" />
                                             <button type="button" className="px-4 py-2 bg-red-500 text-white rounded" onClick={() => remove(index)}>Remove</button>
@@ -209,6 +211,7 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
                                     onChange={(e) => {
                                         if(e.target.files) {
                                             handlePhotoUpload(e.target.files[0]);
+                                            setLoading(true);
                                         }
                                     }}
                                 />
@@ -219,6 +222,12 @@ const CreateWorkshopForm: React.FC<ModalProps> = ({
                                             alt="Uploaded Preview"
                                             className="h-32 w-32 object-cover rounded"
                                         />
+                                    </div>
+                                )}
+
+                                {loading && (
+                                    <div className="flex mt-2 items-center justify-center">
+                                        <CircularProgress color="inherit" />
                                     </div>
                                 )}
                             </div>

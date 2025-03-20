@@ -4,7 +4,7 @@ const workshopSchema = Yup.object().shape({
     name: Yup.string().required("Workshop name is required"),
     summary: Yup.string().required("Summary is required"),
     description: Yup.string().optional(),
-    photo: Yup.mixed().optional(),
+    // photo: Yup.mixed().optional(),
     date: Yup.date().required("Date is required"),
     venue: Yup.string().required("Venue is required"),
     isRecurring: Yup.boolean().required(),

@@ -19,6 +19,7 @@ export const uploadToCloudinary = async(file: File) => {
 
         const response = await axios.post(cloudinaryURL, formData);
         const uploadedURL = response.data.secure_url;
+        console.log("Cloudinary URL: ", uploadedURL);
         return uploadedURL;
 
     } catch (error) {
