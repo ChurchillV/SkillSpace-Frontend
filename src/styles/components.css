@@ -13,3 +13,11 @@
 .nav-item-active {
     @apply flex lg:flex-row flex-col items-center justify-center lg:gap-1 mx-2 text-xs lg:text-white  text-primary rounded-lg lg:scale-125 scale-105 delay-100 transition ease-in-out;
 }
+
+.btn-primary {
+    @apply bg-primary flex items-center justify-center text-sm border text-white lg:px-6 lg:py-3 px-4 py-3 rounded-xl hover:bg-gray-300 hover:text-gray-400 hover:scale-75 transition delay-75;
+}
+
+.btn-secondary {
+    @apply bg-transparent border border-tertiary text-tertiary lg:px-6 lg:py-3 px-4 py-3 rounded-3xl hover:bg-secondary hover:text-secondary hover:scale-75 transition delay-75
+}

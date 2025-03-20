@@ -1,10 +1,16 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { IconMapKey } from "./components/SideBar/iconmap";
 
 // Props for CTA buttons
 export interface CTAButtonProps {
     content: string,
     linkTo: string
+}
+
+export interface ActionButtonProps {
+    content: string,
+    action: () => void,
+    icon: React.ReactNode
 }
 
 export type AuthContextType = {
@@ -54,4 +60,13 @@ export interface NavItemProps {
 
 export interface LayoutProps {
     children: ReactNode;
+}
+
+export interface ModalProps { 
+    isOpen: boolean,
+    onClose: () => void
+}
+
+export interface ImageUploadModalProps extends ModalProps {
+    onUploadSuccess: (imageUrl: string) => void
 }
